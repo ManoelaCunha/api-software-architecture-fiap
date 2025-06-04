@@ -1,44 +1,56 @@
-# API de Fast Food
+# 🍔 API de Fast Food
 
-Tech Challenge do curso Pós Tech de Arquitetura de Software - Sistema de Autoatendimento de Fast Food
+**Tech Challenge** do curso **Pós Tech em Arquitetura de Software** — Sistema de Autoatendimento de Fast Food.
 
-FASE 1 - Arquitetura Hexagonal
-
-## 🛠 Instalação
-
-1. Baixe o repositório utilizando o Git com o commando:<br>
-
-utilizando HTTPS
-
-```sh
-https://github.com/ManoelaCunha/api-software-architecture-fiap.git
-```
-
-ou SSh
-
-```sh
-git@github.com:ManoelaCunha/api-software-architecture-fiap.git
-```
+**Fase 1**: Arquitetura Hexagonal — Projeto em **Node.js** com **TypeORM**, **PostgreSQL**, **Docker**, **Docker Compose** e **Typescript**.
 
 <br>
 
-2. Instale as dependências presentes no arquivo [package.json](/package.json) com o comando:
+## 🛠️ Instalação e execução
+
+### ✅ 1. Clone o repositório
+
+HTTPS
 
 ```sh
-yarn
+git clone https://github.com/ManoelaCunha/api-software-architecture-fiap.git
 ```
 
-<br>
+SSH
 
-3. Execute o seguinte comando para construir e iniciar os containers:
+```sh
+git clone git@github.com:ManoelaCunha/api-software-architecture-fiap.git
+```
+
+---
+
+### ✅ 2. Instale as dependências
+
+```sh
+yarn install
+```
+
+---
+
+### ✅ 3. Configure as variáveis de ambiente
+Edite o arquivo .env conforme necessário.
+
+```sh
+cp .env.example .env
+```
+
+---
+
+### ✅ 4. Construa e inicie os containers com Docker
+Isso iniciará o banco de dados PostgreSQL e a aplicação Node.
 
 ```sh
 docker-compose up --build -d
 ```
 
-<br>
+---
 
-5. Inicie a aplicação com o comando:
+### ✅ 5. Inicie a aplicação
 
 ```sh
 yarn dev
