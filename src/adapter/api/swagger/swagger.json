@@ -1,0 +1,1291 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API de Fast Food",
+    "version": "1.0.0",
+    "description": "Documentação da API de Autoatendimento de Fast Food"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "BASE URL - Development Mode"
+    }
+  ],
+  "paths": {
+    "/customer": {
+      "post": {
+        "description": "Cria um novo cliente no sistema.",
+        "tags": ["Customer"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "John Doe"
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "johndoe@example.com"
+                  },
+                  "cpf": {
+                    "type": "string",
+                    "example": "12345678901"
+                  }
+                },
+                "required": ["name", "email", "cpf"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "example": 1
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "John Doe"
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "johndoe@example.com"
+                    },
+                    "cpf": {
+                      "type": "string",
+                      "example": "12345678901"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "example": "O CPF informado já existe!"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customer/{cpf}": {
+      "get": {
+        "description": "Retorna as informações de um cliente específico com base no CPF.",
+        "tags": ["Customer"],
+        "parameters": [
+          {
+            "name": "cpf",
+            "in": "path",
+            "required": true,
+            "description": "CPF do cliente",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "example": 1
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "John Doe"
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "johndoe@example.com"
+                    },
+                    "cpf": {
+                      "type": "string",
+                      "example": "12345678901"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "example": "O CPF informado não existe!"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/product": {
+      "post": {
+        "description": "Cria um novo produto no sistema.",
+        "tags": ["Product"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Vegan Burger"
+                  },
+                  "price": {
+                    "type": "number",
+                    "example": 49.9
+                  },
+                  "category": {
+                    "type": "string",
+                    "enum": ["Lanche", "Acompanhamento", "Bebida", "Sobremesa"],
+                    "example": "Lanche"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "Hambúrguer vegano com alface e tomate"
+                  },
+                  "imageUrl": {
+                    "type": "string",
+                    "example": "https://example.com/image.jpg"
+                  }
+                },
+                "required": ["name", "price", "category"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "example": 1
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "Vegan Burger"
+                    },
+                    "price": {
+                      "type": "number",
+                      "example": 49.9
+                    },
+                    "category": {
+                      "type": "string",
+                      "example": "Lanche"
+                    },
+                    "description": {
+                      "type": "string",
+                      "example": "Hambúrguer vegano com alface e tomate"
+                    },
+                    "imageUrl": {
+                      "type": "string",
+                      "example": "https://example.com/image.jpg"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "example": "O preço do produto deve ser maior que zero!"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/product/{id}": {
+      "put": {
+        "description": "Atualiza as informações de um produto existente.",
+        "tags": ["Product"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID do produto",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Vegan Burger Deluxe"
+                  },
+                  "price": {
+                    "type": "number",
+                    "example": 59.9
+                  },
+                  "category": {
+                    "type": "string",
+                    "enum": ["Lanche", "Acompanhamento", "Bebida", "Sobremesa"],
+                    "example": "Lanche"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "Versão deluxe do hambúrguer vegano"
+                  },
+                  "imageUrl": {
+                    "type": "string",
+                    "example": "https://example.com/image.jpg"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "example": 1
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "Vegan Burger Deluxe"
+                    },
+                    "price": {
+                      "type": "number",
+                      "example": 59.9
+                    },
+                    "category": {
+                      "type": "string",
+                      "enum": [
+                        "Lanche",
+                        "Acompanhamento",
+                        "Bebida",
+                        "Sobremesa"
+                      ],
+                      "example": "Lanche"
+                    },
+                    "description": {
+                      "type": "string",
+                      "example": "Versão deluxe do hambúrguer vegano"
+                    },
+                    "imageUrl": {
+                      "type": "string",
+                      "example": "https://example.com/image.jpg"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "example": "Produto não existe!"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Exclui um produto existente pelo ID.",
+        "tags": ["Product"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID do produto",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No body returned for response"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "example": "Produto não existe!"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "description": "Retorna um produto pelo ID.",
+        "tags": ["Product"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "example": 1
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "Vegan Burger"
+                    },
+                    "price": {
+                      "type": "number",
+                      "example": 49.9
+                    },
+                    "category": {
+                      "type": "string",
+                      "example": "Lanche"
+                    },
+                    "description": {
+                      "type": "string",
+                      "example": "Hambúrguer vegano com alface e tomate"
+                    },
+                    "imageUrl": {
+                      "type": "string",
+                      "example": "https://example.com/image.jpg"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "example": "Produto não existe!"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/product/category/{category}": {
+      "get": {
+        "description": "Retorna produtos de uma categoria específica.",
+        "tags": ["Product"],
+        "parameters": [
+          {
+            "name": "category",
+            "in": "path",
+            "required": true,
+            "description": "Categoria do produto",
+            "schema": {
+              "type": "string",
+              "enum": ["Lanche", "Acompanhamento", "Bebida", "Sobremesa"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "Vegan Burger"
+                      },
+                      "price": {
+                        "type": "number",
+                        "example": 49.9
+                      },
+                      "category": {
+                        "type": "string",
+                        "example": "Lanche"
+                      },
+                      "description": {
+                        "type": "string",
+                        "example": "Hambúrguer vegano com alface e tomate"
+                      },
+                      "imageUrl": {
+                        "type": "string",
+                        "example": "https://example.com/image.jpg"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "example": "Nenhum produto encontrado na categoria!"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/order": {
+      "post": {
+        "description": "Cria um novo pedido no sistema com o produtos fornecidos e o cliente opcional. Pedidos podem ser feitos com ou sem clientes associados.",
+        "tags": ["Order"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "cpf": {
+                    "type": "string",
+                    "example": "12345678901"
+                  },
+                  "products": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "productId": {
+                          "type": "number",
+                          "example": 1
+                        },
+                        "quantity": {
+                          "type": "number",
+                          "example": 2
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created - Quando um cliente é associado a compra retorna informações dele.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "example": 1
+                    },
+                    "customer": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "name": {
+                          "type": "string",
+                          "example": "John Doe"
+                        },
+                        "email": {
+                          "type": "string",
+                          "example": "johndoe@example.com"
+                        },
+                        "cpf": {
+                          "type": "string",
+                          "example": "12345678901"
+                        }
+                      }
+                    },
+                    "products": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "example": 1
+                          },
+                          "product": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "integer",
+                                "example": 1
+                              },
+                              "name": {
+                                "type": "string",
+                                "example": "Vegan Burger Deluxe"
+                              },
+                              "price": {
+                                "type": "number",
+                                "format": "float",
+                                "example": 59.9
+                              },
+                              "category": {
+                                "type": "string",
+                                "example": "Lanche"
+                              },
+                              "description": {
+                                "type": "string",
+                                "example": "Versão deluxe do hambúrguer vegano"
+                              },
+                              "imageUrl": {
+                                "type": "string",
+                                "example": "https://example.com/image.jpg"
+                              }
+                            }
+                          },
+                          "quantity": {
+                            "type": "integer",
+                            "example": 2
+                          },
+                          "totalProduct": {
+                            "type": "number",
+                            "format": "float",
+                            "example": 119.8
+                          }
+                        }
+                      }
+                    },
+                    "payment": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "totalOrder": {
+                      "type": "number",
+                      "format": "float",
+                      "example": 119.8
+                    },
+                    "status": {
+                      "type": "string",
+                      "example": "Recebido"
+                    },
+                    "pix": {
+                      "type": "string",
+                      "example": "https://www.mercadopago.com.br/sandbox/payments/1328153351/ticket?caller_id=1226172748&hash=4da5e510-22ac-43bd-bddc-72c5316fb2f3"
+                    },
+                    "createdDate": {
+                      "type": "string",
+                      "format": "date-time",
+                      "example": "2024-11-12T13:24:00.275Z"
+                    },
+                    "updatedDate": {
+                      "type": "string",
+                      "format": "date-time",
+                      "example": "2024-11-12T13:24:02.084Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "example": "O pedido deve conter pelo menos um produto!"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/order/{id}/status": {
+      "put": {
+        "description": "Atualiza o status do pedido para a próxima etapa do processo.",
+        "tags": ["Order"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Status atualizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Em preparação"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "example": "Pedido não existe!"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "example": "Pedido foi cancelado e não pode ser atualizado!"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/order/{id}": {
+      "get": {
+        "description": "Retorna um pedido pelo ID.",
+        "tags": ["Order"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "example": 1
+                    },
+                    "customer": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "name": {
+                          "type": "string",
+                          "example": "John Doe"
+                        },
+                        "email": {
+                          "type": "string",
+                          "example": "johndoe@example.com"
+                        },
+                        "cpf": {
+                          "type": "string",
+                          "example": "12345678901"
+                        }
+                      }
+                    },
+                    "products": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "example": 1
+                          },
+                          "product": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "integer",
+                                "example": 1
+                              },
+                              "name": {
+                                "type": "string",
+                                "example": "Vegan Burger Deluxe"
+                              },
+                              "price": {
+                                "type": "number",
+                                "format": "float",
+                                "example": 59.9
+                              },
+                              "category": {
+                                "type": "string",
+                                "example": "Lanche"
+                              },
+                              "description": {
+                                "type": "string",
+                                "example": "Versão deluxe do hambúrguer vegano"
+                              },
+                              "imageUrl": {
+                                "type": "string",
+                                "example": "https://example.com/image.jpg"
+                              }
+                            }
+                          },
+                          "quantity": {
+                            "type": "integer",
+                            "example": 2
+                          },
+                          "totalProduct": {
+                            "type": "number",
+                            "format": "float",
+                            "example": 119.8
+                          }
+                        }
+                      }
+                    },
+                    "payment": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "totalOrder": {
+                      "type": "number",
+                      "format": "float",
+                      "example": 119.8
+                    },
+                    "status": {
+                      "type": "string",
+                      "example": "Recebido"
+                    },
+                    "pix": {
+                      "type": "string",
+                      "example": "https://www.mercadopago.com.br/sandbox/payments/1328153351/ticket?caller_id=1226172748&hash=4da5e510-22ac-43bd-bddc-72c5316fb2f3"
+                    },
+                    "createdDate": {
+                      "type": "string",
+                      "format": "date-time",
+                      "example": "2024-11-12T13:24:00.275Z"
+                    },
+                    "updatedDate": {
+                      "type": "string",
+                      "format": "date-time",
+                      "example": "2024-11-12T13:24:02.084Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "example": "Pedido não existe!"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/order/status/{status}": {
+      "get": {
+        "description": "Retorna todos os pedidos de um status específico.",
+        "tags": ["Order"],
+        "parameters": [
+          {
+            "name": "status",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Recebido",
+                "Em preparação",
+                "Pronto",
+                "Finalizado",
+                "Cancelado"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "customer": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "example": 1
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "John Doe"
+                          },
+                          "email": {
+                            "type": "string",
+                            "example": "johndoe@example.com"
+                          },
+                          "cpf": {
+                            "type": "string",
+                            "example": "12345678901"
+                          }
+                        }
+                      },
+                      "products": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "integer",
+                              "example": 1
+                            },
+                            "product": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "integer",
+                                  "example": 1
+                                },
+                                "name": {
+                                  "type": "string",
+                                  "example": "Vegan Burger Deluxe"
+                                },
+                                "price": {
+                                  "type": "number",
+                                  "format": "float",
+                                  "example": 59.9
+                                },
+                                "category": {
+                                  "type": "string",
+                                  "example": "Lanche"
+                                },
+                                "description": {
+                                  "type": "string",
+                                  "example": "Versão deluxe do hambúrguer vegano"
+                                },
+                                "imageUrl": {
+                                  "type": "string",
+                                  "example": "https://example.com/image.jpg"
+                                }
+                              }
+                            },
+                            "quantity": {
+                              "type": "integer",
+                              "example": 2
+                            },
+                            "totalProduct": {
+                              "type": "number",
+                              "format": "float",
+                              "example": 119.8
+                            }
+                          }
+                        }
+                      },
+                      "payment": {
+                        "type": "boolean",
+                        "example": true
+                      },
+                      "totalOrder": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 119.8
+                      },
+                      "status": {
+                        "type": "string",
+                        "example": "Recebido"
+                      },
+                      "pix": {
+                        "type": "string",
+                        "example": "https://www.mercadopago.com.br/sandbox/payments/1328153351/ticket?caller_id=1226172748&hash=4da5e510-22ac-43bd-bddc-72c5316fb2f3"
+                      },
+                      "createdDate": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-11-12T13:24:00.275Z"
+                      },
+                      "updatedDate": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-11-12T13:24:02.084Z"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "example": "Nenhum pedido encontrado!"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/orders": {
+      "get": {
+        "description": "Retorna todos os pedidos.",
+        "tags": ["Order"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "customer": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "example": 1
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "John Doe"
+                          },
+                          "email": {
+                            "type": "string",
+                            "example": "johndoe@example.com"
+                          },
+                          "cpf": {
+                            "type": "string",
+                            "example": "12345678901"
+                          }
+                        }
+                      },
+                      "products": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "integer",
+                              "example": 1
+                            },
+                            "product": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "integer",
+                                  "example": 1
+                                },
+                                "name": {
+                                  "type": "string",
+                                  "example": "Vegan Burger Deluxe"
+                                },
+                                "price": {
+                                  "type": "number",
+                                  "format": "float",
+                                  "example": 59.9
+                                },
+                                "category": {
+                                  "type": "string",
+                                  "example": "Lanche"
+                                },
+                                "description": {
+                                  "type": "string",
+                                  "example": "Versão deluxe do hambúrguer vegano"
+                                },
+                                "imageUrl": {
+                                  "type": "string",
+                                  "example": "https://example.com/image.jpg"
+                                }
+                              }
+                            },
+                            "quantity": {
+                              "type": "integer",
+                              "example": 2
+                            },
+                            "totalProduct": {
+                              "type": "number",
+                              "format": "float",
+                              "example": 119.8
+                            }
+                          }
+                        }
+                      },
+                      "payment": {
+                        "type": "boolean",
+                        "example": true
+                      },
+                      "totalOrder": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 119.8
+                      },
+                      "status": {
+                        "type": "string",
+                        "example": "Recebido"
+                      },
+                      "pix": {
+                        "type": "string",
+                        "example": "https://www.mercadopago.com.br/sandbox/payments/1328153351/ticket?caller_id=1226172748&hash=4da5e510-22ac-43bd-bddc-72c5316fb2f3"
+                      },
+                      "createdDate": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-11-12T13:24:00.275Z"
+                      },
+                      "updatedDate": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-11-12T13:24:02.084Z"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "example": "Nenhum pedido encontrado!"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

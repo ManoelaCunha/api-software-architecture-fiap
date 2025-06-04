@@ -1,0 +1,38 @@
+{
+  "name": "api-software-architecture-fiap",
+  "version": "1.0.0",
+  "main": "server.ts",
+  "repository": "git@github.com:ManoelaCunha/api-software-architecture-fiap.git",
+  "author": "Manoela Cunha <manoela_fg@hotmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "mercadopago": "^2.7.0",
+    "pg": "^8.16.0",
+    "reflect-metadata": "^0.2.2",
+    "swagger-ui-express": "^5.0.1",
+    "typeorm": "^0.3.24",
+    "yup": "^1.6.1"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.18",
+    "@types/express": "^5.0.2",
+    "@types/mercadopago": "^1.5.11",
+    "@types/node": "^22.15.29",
+    "@types/swagger-jsdoc": "^6.0.4",
+    "@types/swagger-ui-express": "^4.1.8",
+    "nodemon": "^3.1.10",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "ts-node src/server.ts typeorm-ts-node-commonjs -d",
+    "dev": "nodemon --exec ts-node src/server.ts",
+    "migration:generate": "typeorm-ts-node-commonjs -d ./src/adapter/infrastructure/database/data-source.ts migration:generate ./src/adapter/infrastructure/database/migrations/migration",
+    "migration:run": "typeorm-ts-node-commonjs -d ./src/adapter/infrastructure/database/data-source.ts migration:run",
+    "typeorm": "typeorm-ts-node-commonjs"
+  }
+}

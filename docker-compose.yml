@@ -1,0 +1,39 @@
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  pgdata:
+
+services:
+  api:
+    build: .
+    restart: always
+    ports:
+      - 3030:3000
+    environment:
+      PORT: ${PORT}
+      DATABASE_HOST: ${DATABASE_HOST}
+      DATABASE_PORT: ${DATABASE_PORT}
+      DATABASE_USER: ${DATABASE_USER}
+      DATABASE_PASS: ${DATABASE_PASS}
+      DATABASE_NAME: ${DATABASE_NAME}
+      MP_ACCESS_TOKEN: ${MP_ACCESS_TOKEN}
+    depends_on:
+      - db-postgres
+    networks:
+      - app-network
+
+  db-postgres:
+    image: postgres:17
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASS}
+      POSTGRES_DB: ${DATABASE_NAME}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - app-network
