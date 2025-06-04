@@ -11,13 +11,13 @@ FASE 1 - Arquitetura Hexagonal
 utilizando HTTPS
 
 ```sh
-https://github.com/ManoelaCunha/fiap-software-architecture-api.git
+https://github.com/ManoelaCunha/api-software-architecture-fiap.git
 ```
 
 ou SSh
 
 ```sh
-git@github.com:ManoelaCunha/fiap-software-architecture-api.git
+git@github.com:ManoelaCunha/api-software-architecture-fiap.git
 ```
 
 <br>
