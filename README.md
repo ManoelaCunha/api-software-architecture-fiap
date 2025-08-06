@@ -90,6 +90,6 @@ kubectl apply -f k8s/app/
 
 - Docker Compose  http://localhost:3030/api-docs
 
-- Kubernetes Minikub  http://192.168.49.2:30080
+- Kubernetes Minikub  http://192.168.49.2:30080/api-docs
 
 <br>
