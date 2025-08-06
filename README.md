@@ -4,6 +4,8 @@
 
 **Fase 2**: Arquitetura Limpa — Projeto em **Node.js** com **TypeORM**, **PostgreSQL**, **Docker**, **Docker Compose** e **Typescript**.
 
+**Design System**: 
+
 <br>
 
 ## 🛠️ Instalação e execução
@@ -58,25 +60,24 @@ docker-compose up --build -d
 
 ---
 
-### ✅ 5. Inicie a aplicação com Kubernetes e Minikube
+### ✅ 5. Construa e inicie a aplicação com Kubernetes e Minikube
 Isso iniciará o banco de dados PostgreSQL e a aplicação Node.
 
 ```sh
-- Minikub
+#Minikub
 minikube start
-
 eval $(minikube docker-env)
 
-- Imagem Docker
+#Imagem Docker
 docker build -t api-fiap:latest .
 
-- Configurações
+#Configurações
 kubectl apply -f k8s/config/
 
-- Banco de Dados
+#Banco de Dados
 kubectl apply -f k8s/database/
 
-- Aplicação
+#Aplicação
 kubectl apply -f k8s/app/
 
 ```
