@@ -2,7 +2,7 @@
 
 **Tech Challenge** do curso **Pós Tech em Arquitetura de Software** — Sistema de Autoatendimento de Fast Food.
 
-**Fase 1**: Arquitetura Hexagonal — Projeto em **Node.js** com **TypeORM**, **PostgreSQL**, **Docker**, **Docker Compose** e **Typescript**.
+**Fase 2**: Arquitetura Limpa — Projeto em **Node.js** com **TypeORM**, **PostgreSQL**, **Docker**, **Docker Compose** e **Typescript**.
 
 <br>
 
@@ -41,7 +41,15 @@ cp .env.example .env
 
 ---
 
-### ✅ 4. Construa e inicie os containers com Docker
+### ✅ 4. Inicie a aplicação localmente
+
+```sh
+yarn dev
+```
+
+---
+
+### ✅ 5. Construa e inicie os containers com Docker
 Isso iniciará o banco de dados PostgreSQL e a aplicação Node.
 
 ```sh
@@ -50,16 +58,37 @@ docker-compose up --build -d
 
 ---
 
-### ✅ 5. Inicie a aplicação
+### ✅ 5. Inicie a aplicação com Kubernetes e Minikube
+Isso iniciará o banco de dados PostgreSQL e a aplicação Node.
 
 ```sh
-yarn dev
+- Minikub
+minikube start
+
+eval $(minikube docker-env)
+
+- Imagem Docker
+docker build -t api-fiap:latest .
+
+- Configurações
+kubectl apply -f k8s/config/
+
+- Banco de Dados
+kubectl apply -f k8s/database/
+
+- Aplicação
+kubectl apply -f k8s/app/
+
 ```
 
 <br>
 
 ## 📈 Documentação com Swagger
 
-- http://localhost:3000/api-docs
+- Ambiente Local  http://localhost:3000/api-docs
+
+- Docker Compose  http://localhost:3030/api-docs
+
+- Kubernetes Minikub  http://192.168.49.2:30080
 
 <br>
