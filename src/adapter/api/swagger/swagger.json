@@ -9,6 +9,14 @@
     {
       "url": "http://localhost:3000",
       "description": "BASE URL - Development Mode"
+    },
+    {
+      "url": "http://localhost:3030",
+      "description": "BASE URL - Docker Compose Mode"
+    },
+    {
+      "url": "http://192.168.49.2:30080",
+      "description": "BASE URL - Kubernetes Minikube Mode"
     }
   ],
   "paths": {
