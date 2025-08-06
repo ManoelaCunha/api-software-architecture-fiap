@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
-import { DomainError } from "../../../core/domain/_errors/domain.error";
-import { ApplicationError } from "../../../core/application/_errors/application.error";
+import { DomainError } from "../../domain/_errors/domain.error";
+import { ApplicationError } from "../../application/_errors/application.error";
 import { ValidationError } from "yup";
 
 export const errorHandler = (

@@ -7,7 +7,7 @@ import {
   UpdateDateColumn,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { OrderStatus } from "../../../../core/domain/order/entities/orderStatus";
+import { OrderStatus } from "../../../domain/order/entities/orderStatus";
 import { CustomerEntity } from "../../customer/entities/customer.entity";
 import { OrderProductEntity } from "./orderProduct.entity";
 

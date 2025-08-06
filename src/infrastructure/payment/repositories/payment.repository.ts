@@ -7,12 +7,12 @@ import { OrderEntity } from "../../order/entities/order.entity";
 import { MercadoPagoConfig, Payment } from "mercadopago";
 import { PaymentResponse } from "mercadopago/dist/clients/payment/commonTypes";
 
-import { Order } from "../../../../core/domain/order/entities/order";
-import { Customer } from "../../../../core/domain/customer/entities/customer";
-import { OrderStatus } from "../../../../core/domain/order/entities/orderStatus";
-import { IPaymentRepository } from "../../../../core/application/payment/interfaces/payment.interface";
-import { OrderFactory } from "../../../../core/application/order/factories/order.factory";
-import { OrderDTO } from "../../../../core/application/order/dtos/order.dto";
+import { Order } from "../../../domain/order/entities/order";
+import { Customer } from "../../../domain/customer/entities/customer";
+import { OrderStatus } from "../../../domain/order/entities/orderStatus";
+import { IPaymentRepository } from "../../../application/payment/interfaces/payment.interface";
+import { OrderFactory } from "../../../application/order/factories/order.factory";
+import { OrderDTO } from "../../../application/order/dtos/order.dto";
 
 dotenv.config();
 

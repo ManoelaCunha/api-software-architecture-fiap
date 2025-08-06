@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
-import { ProductCategory } from "../../../core/domain/product/entities/productCategory";
-import { ProductService } from "../../../core/application/product/services/product.service";
+import { ProductCategory } from "../../domain/product/entities/productCategory";
+import { ProductService } from "../../application/product/services/product.service";
 
 export class ProductController {
   constructor(private productService: ProductService) {}

@@ -2,10 +2,10 @@ import { Repository, DeleteResult } from "typeorm";
 import { AppDataSource } from "../../database/data-source";
 import { ProductEntity } from "../entities/product.entity";
 
-import { Product } from "../../../../core/domain/product/entities/product";
-import { ProductCategory } from "../../../../core/domain/product/entities/productCategory";
-import { ProductFactory } from "../../../../core/application/product/factories/product.factory";
-import { IProductRepository } from "../../../../core/application/product/interfaces/product.interface";
+import { Product } from "../../../domain/product/entities/product";
+import { ProductCategory } from "../../../domain/product/entities/productCategory";
+import { ProductFactory } from "../../../application/product/factories/product.factory";
+import { IProductRepository } from "../../../application/product/interfaces/product.interface";
 
 export class ProductRepository implements IProductRepository {
   private ormRepository: Repository<ProductEntity>;

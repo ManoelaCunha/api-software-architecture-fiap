@@ -1,7 +1,7 @@
 import { Router, Application } from "express";
 import { OrderController } from "./order.controller";
-import { OrderService } from "../../../core/application/order/services/order.service";
-import { PaymentService } from "../../../core/application/payment/services/payment.service";
+import { OrderService } from "../../application/order/services/order.service";
+import { PaymentService } from "../../application/payment/services/payment.service";
 import { OrderRepository } from "../../infrastructure/order/repositories/order.repository";
 import { ProductRepository } from "../../infrastructure/product/repositories/product.repository";
 import { CustomerRepository } from "../../infrastructure/customer/repositories/customer.repository";

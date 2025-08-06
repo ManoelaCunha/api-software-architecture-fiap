@@ -1,7 +1,7 @@
 import app from "./app";
 import dotenv from "dotenv";
 
-import { AppDataSource } from "./adapter/infrastructure/database/data-source";
+import { AppDataSource } from "./infrastructure/database/data-source";
 
 dotenv.config();
 

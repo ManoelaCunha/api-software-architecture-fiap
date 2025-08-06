@@ -2,12 +2,12 @@ import express from "express";
 import cors from "cors";
 
 import swaggerUi from "swagger-ui-express";
-import * as swaggerDocument from "./adapter/api/swagger/swagger.json";
+import * as swaggerDocument from "./presentation/swagger/swagger.json";
 
-import { customerRouter } from "./adapter/api/customer/customer.router";
-import { productRouter } from "./adapter/api/product/product.router";
-import { orderRouter } from "./adapter/api/order/order.router";
-import { errorHandler } from "./adapter/api/_errors/errorHandler";
+import { customerRouter } from "./presentation/customer/customer.router";
+import { productRouter } from "./presentation/product/product.router";
+import { orderRouter } from "./presentation/order/order.router";
+import { errorHandler } from "./presentation/_errors/errorHandler";
 
 const app = express();
 

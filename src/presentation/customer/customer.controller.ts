@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { CustomerService } from "../../../core/application/customer/services/customer.service";
+import { CustomerService } from "../../application/customer/services/customer.service";
 
 export class CustomerController {
   constructor(private customerService: CustomerService) {}

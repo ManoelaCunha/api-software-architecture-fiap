@@ -2,9 +2,9 @@ import { Repository } from "typeorm";
 import { AppDataSource } from "../../database/data-source";
 import { CustomerEntity } from "../entities/customer.entity";
 
-import { Customer } from "../../../../core/domain/customer/entities/customer";
-import { CustomerFactory } from "../../../../core/application/customer/factories/customer.factory";
-import { ICustomerRepository } from "../../../../core/application/customer/interfaces/customer.interface";
+import { Customer } from "../../../domain/customer/entities/customer";
+import { CustomerFactory } from "../../../application/customer/factories/customer.factory";
+import { ICustomerRepository } from "../../../application/customer/interfaces/customer.interface";
 
 export class CustomerRepository implements ICustomerRepository {
   private ormRepository: Repository<CustomerEntity>;

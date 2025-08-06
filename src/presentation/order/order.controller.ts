@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
-import { OrderStatus } from "../../../core/domain/order/entities/orderStatus";
-import { OrderService } from "../../../core/application/order/services/order.service";
+import { OrderStatus } from "../../domain/order/entities/orderStatus";
+import { OrderService } from "../../application/order/services/order.service";
 
 export class OrderController {
   constructor(private orderService: OrderService) {}

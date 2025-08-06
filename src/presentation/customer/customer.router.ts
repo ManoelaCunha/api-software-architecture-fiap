@@ -1,7 +1,7 @@
 import { Router, Application } from "express";
 import { CustomerController } from "./customer.controller";
 import { CustomerRepository } from "../../infrastructure/customer/repositories/customer.repository";
-import { CustomerService } from "../../../core/application/customer/services/customer.service";
+import { CustomerService } from "../../application/customer/services/customer.service";
 
 const customerRepository = new CustomerRepository();
 const customerService = new CustomerService(customerRepository);

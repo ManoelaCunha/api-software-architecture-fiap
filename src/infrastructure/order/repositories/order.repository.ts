@@ -1,11 +1,11 @@
-import { Repository } from "typeorm";
+import { In, Not, Repository } from "typeorm";
 import { AppDataSource } from "../../database/data-source";
 
-import { Order } from "../../../../core/domain/order/entities/order";
-import { OrderStatus } from "../../../../core/domain/order/entities/orderStatus";
-import { OrderDTO } from "../../../../core/application/order/dtos/order.dto";
-import { OrderFactory } from "../../../../core/application/order/factories/order.factory";
-import { IOrderRepository } from "../../../../core/application/order/interfaces/order.interface";
+import { Order } from "../../../domain/order/entities/order";
+import { OrderStatus } from "../../../domain/order/entities/orderStatus";
+import { OrderDTO } from "../../../application/order/dtos/order.dto";
+import { OrderFactory } from "../../../application/order/factories/order.factory";
+import { IOrderRepository } from "../../../application/order/interfaces/order.interface";
 
 import { OrderEntity } from "../entities/order.entity";
 import { OrderProductEntity } from "../entities/orderProduct.entity";
@@ -68,6 +68,7 @@ export class OrderRepository implements IOrderRepository {
   async findByStatus(status: OrderStatus): Promise<Order[]> {
     const orderEntity = await this.ormRepository.find({
       where: { status },
+      order: { createdDate: "ASC" }
     });
     return orderEntity.map((order) => {
       return OrderFactory.create(order as OrderDTO);
@@ -83,9 +84,22 @@ export class OrderRepository implements IOrderRepository {
   async findAll(): Promise<Order[]> {
     const orderEntities = await this.ormRepository.find({
       relations: ["products", "customer"],
+      where: {
+        status: In([OrderStatus.PRONTO, OrderStatus.EM_PREPARACAO, OrderStatus.RECEBIDO])
+      },
+      order: { createdDate: "ASC" }
     });
-    return orderEntities.map((order) => {
-      return OrderFactory.create(order as OrderDTO);
-    });
+
+    const priorityOrder: Partial<Record<OrderStatus, number>> = {
+      [OrderStatus.PRONTO]: 1,
+      [OrderStatus.EM_PREPARACAO]: 2,
+      [OrderStatus.RECEBIDO]: 3,
+    };
+
+    const sortedOrders = orderEntities.sort(
+      (a, b) => (priorityOrder[a.status] ?? 999) - (priorityOrder[b.status] ?? 999)
+    );
+
+    return sortedOrders.map(order => OrderFactory.create(order as OrderDTO));
   }
 }
