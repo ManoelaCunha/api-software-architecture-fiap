@@ -17,7 +17,7 @@ const AppDataSourceOptions: DataSourceOptions = {
   password: process.env.DATABASE_PASS,
   database: process.env.DATABASE_NAME,
   entities: [CustomerEntity, ProductEntity, OrderEntity, OrderProductEntity],
-  migrations: ["src/adapter/infrastructure/database/migrations/*.ts"],
+  migrations: ["src/infrastructure/database/migrations/*.ts"],
   synchronize: false,
   logging: false,
 };

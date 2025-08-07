@@ -1,4 +1,4 @@
-import { In, Not, Repository } from "typeorm";
+import { In, Repository } from "typeorm";
 import { AppDataSource } from "../../database/data-source";
 
 import { Order } from "../../../domain/order/entities/order";
@@ -77,7 +77,9 @@ export class OrderRepository implements IOrderRepository {
 
   async findById(orderId: number): Promise<Order | null> {
     const orderEntity = await this.ormRepository.findOneBy({ id: orderId });
-    if (!orderEntity) return null;
+    if (!orderEntity) {
+      return null
+    };
     return OrderFactory.create(orderEntity as OrderDTO);
   }
 

@@ -7,9 +7,11 @@ import {
   UpdateDateColumn,
   PrimaryGeneratedColumn,
 } from "typeorm";
+import { PaymentStatus } from "../../../domain/payment/paymentStatus";
 import { OrderStatus } from "../../../domain/order/entities/orderStatus";
 import { CustomerEntity } from "../../customer/entities/customer.entity";
 import { OrderProductEntity } from "./orderProduct.entity";
+
 
 @Entity("orders")
 export class OrderEntity {
@@ -27,8 +29,8 @@ export class OrderEntity {
   @Column({ type: "enum", enum: OrderStatus, default: OrderStatus.RECEBIDO })
   status: OrderStatus;
 
-  @Column({ type: "boolean", default: false })
-  payment: boolean;
+  @Column({ type: "enum", enum: PaymentStatus, default: PaymentStatus.PENDENTE })
+  paymentStatus: PaymentStatus;
 
   @Column({ nullable: true })
   pix: string;

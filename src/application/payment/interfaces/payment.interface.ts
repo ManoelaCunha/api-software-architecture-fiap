@@ -14,4 +14,6 @@ export interface IPaymentRepository {
     status: OrderStatus,
     pix?: string
   ): Promise<Order>;
+  getStatusPayment(orderId: number): Promise<string | null>;
+  mockPaymentWebhook(orderId: number, paymentStatus: string): Promise<string | null>;
 }

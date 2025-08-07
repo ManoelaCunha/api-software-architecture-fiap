@@ -5,7 +5,7 @@ import { OrderDTO } from "../dtos/order.dto";
 
 export class OrderFactory {
   static create(order: OrderDTO): Order {
-    const { id, status, createdDate, updatedDate, pix, payment } = order;
+    const { id, status, createdDate, updatedDate, pix, paymentStatus } = order;
 
     const products = order.products.map((product) =>
       OrderProductFactory.create(product)
@@ -24,7 +24,7 @@ export class OrderFactory {
       createdDate,
       updatedDate,
       pix,
-      payment
+      paymentStatus
     );
   }
 }

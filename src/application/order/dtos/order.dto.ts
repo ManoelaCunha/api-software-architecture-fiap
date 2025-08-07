@@ -1,4 +1,5 @@
 import { OrderStatus } from "../../../domain/order/entities/orderStatus";
+import { PaymentStatus } from "../../../domain/payment/paymentStatus";
 import { CustomerDTO } from "../../customer/dtos/customer.dto";
 import { OrderProductDTO } from "./orderProduct.dto";
 
@@ -9,6 +10,6 @@ export interface OrderDTO {
   status?: OrderStatus;
   createdDate?: Date;
   updatedDate?: Date;
-  payment?: boolean;
+  paymentStatus?: PaymentStatus;
   pix?: string;
 }

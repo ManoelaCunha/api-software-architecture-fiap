@@ -1,5 +1,6 @@
 import { DomainError } from "../../_errors/domain.error";
 import { Customer } from "../../customer/entities/customer";
+import { PaymentStatus } from "../../payment/paymentStatus";
 import { Status } from "../value-objects/status";
 import { OrderProduct } from "./orderProduct";
 import { OrderStatus } from "./orderStatus";
@@ -12,7 +13,7 @@ export class Order {
   private _totalOrder: number;
   private _createdDate: Date;
   private _updatedDate: Date;
-  private _payment: boolean;
+  private _paymentStatus: PaymentStatus;
   private _pix?: string;
 
   constructor(
@@ -23,7 +24,7 @@ export class Order {
     createdDate?: Date,
     updatedDate?: Date,
     pix?: string,
-    payment?: boolean
+    paymentStatus?: PaymentStatus
   ) {
     this.id = id;
     this.products = products;
@@ -32,7 +33,7 @@ export class Order {
     this.totalOrder = this.calculateTotalOrder();
     this.createdDate = createdDate ?? new Date();
     this.updatedDate = updatedDate ?? new Date();
-    this.payment = payment ?? false;
+    this.paymentStatus = paymentStatus ?? PaymentStatus.PENDENTE;
     this.pix = pix;
   }
 
@@ -64,11 +65,11 @@ export class Order {
     return this._updatedDate;
   }
 
-  set payment(value: boolean) {
-    this._payment = value;
+  set paymentStatus(value: PaymentStatus) {
+    this._paymentStatus = value;
   }
-  get payment(): boolean {
-    return this._payment;
+  get paymentStatus(): PaymentStatus {
+    return this._paymentStatus;
   }
 
   set pix(value: string | undefined) {
@@ -113,7 +114,7 @@ export class Order {
       id: this.id,
       customer: this.customer,
       products: this.products,
-      payment: this.payment,
+      paymentStatus: this.paymentStatus,
       totalOrder: this.totalOrder,
       status: this.status,
       pix: this.pix,

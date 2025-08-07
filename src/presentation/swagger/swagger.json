@@ -698,9 +698,9 @@
                         }
                       }
                     },
-                    "payment": {
-                      "type": "boolean",
-                      "example": true
+                    "paymentStatus": {
+                      "type": "string",
+                      "example": "Pendente"
                     },
                     "totalOrder": {
                       "type": "number",
@@ -928,9 +928,9 @@
                         }
                       }
                     },
-                    "payment": {
-                      "type": "boolean",
-                      "example": true
+                    "paymentStatus": {
+                      "type": "string",
+                      "example": "Pendente"
                     },
                     "totalOrder": {
                       "type": "number",
@@ -1091,9 +1091,9 @@
                           }
                         }
                       },
-                      "payment": {
-                        "type": "boolean",
-                        "example": true
+                      "paymentStatus": {
+                        "type": "string",
+                        "example": "Pendente"
                       },
                       "totalOrder": {
                         "type": "number",
@@ -1238,9 +1238,9 @@
                           }
                         }
                       },
-                      "payment": {
-                        "type": "boolean",
-                        "example": true
+                      "paymentStatus": {
+                        "type": "string",
+                        "example": "Pendente"
                       },
                       "totalOrder": {
                         "type": "number",
@@ -1284,6 +1284,147 @@
                         "message": {
                           "type": "string",
                           "example": "Nenhum pedido encontrado!"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mock/payment/status": {
+      "post": {
+        "description": "Webhook para receber confirmação de pagamento 'Aprovado' ou 'Recusado'",
+        "tags": ["Payment"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "orderId": {
+                    "type": "number",
+                    "example": "1"
+                  },
+                  "status": {
+                    "type": "string",
+                    "example": "Aprovado"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "paymentStatus": {
+                      "type": "string",
+                      "example": "Aprovado"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "example": "Pedido não existe!"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "example": "Status de pagamento não é válido!"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/payment/{orderId}": {
+      "get": {
+        "description": "Retorna status de pagamento do pedido.",
+        "tags": ["Payment"],
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "paymentStatus": {
+                      "type": "string",
+                      "example": "Aprovado"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "example": "Pedido não existe!"
                         }
                       }
                     }

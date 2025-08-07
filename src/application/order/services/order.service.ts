@@ -55,7 +55,7 @@ export class OrderService {
         orderCreated.customer
       );
 
-      // PIX → "fake checkout" do pedido como RECEBIDO
+      // Salva QRCode PIX → "fake checkout" do pedido como PENDENTE
       const updatePaymentOrder = await this.paymentService.updatePixPayment(
         orderCreated.id!,
         paymentPixCreated

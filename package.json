@@ -31,8 +31,8 @@
     "build": "tsc",
     "start": "ts-node src/server.ts typeorm-ts-node-commonjs -d",
     "dev": "nodemon --exec ts-node src/server.ts",
-    "migration:generate": "typeorm-ts-node-commonjs -d ./src/adapter/infrastructure/database/data-source.ts migration:generate ./src/adapter/infrastructure/database/migrations/migration",
-    "migration:run": "typeorm-ts-node-commonjs -d ./src/adapter/infrastructure/database/data-source.ts migration:run",
+    "migration:generate": "typeorm-ts-node-commonjs -d ./src/infrastructure/database/data-source.ts migration:generate ./src/infrastructure/database/migrations/migration",
+    "migration:run": "typeorm-ts-node-commonjs -d ./src/infrastructure/database/data-source.ts migration:run",
     "typeorm": "typeorm-ts-node-commonjs"
   }
 }

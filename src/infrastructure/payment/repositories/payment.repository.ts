@@ -13,6 +13,7 @@ import { OrderStatus } from "../../../domain/order/entities/orderStatus";
 import { IPaymentRepository } from "../../../application/payment/interfaces/payment.interface";
 import { OrderFactory } from "../../../application/order/factories/order.factory";
 import { OrderDTO } from "../../../application/order/dtos/order.dto";
+import { PaymentStatus } from "../../../domain/payment/paymentStatus";
 
 dotenv.config();
 
@@ -58,14 +59,34 @@ export class PaymentRepository implements IPaymentRepository {
     status: OrderStatus,
     pix?: string
   ): Promise<Order> {
-    await this.ormRepository.update(orderId as number, {
-      pix,
-      status,
-      payment: !!pix,
-    });
+    await this.ormRepository.update(orderId as number, { pix, status });
 
-    const order = await this.ormRepository.findOneBy({ id: orderId });
+    const orderEntity = await this.ormRepository.findOneBy({ id: orderId });
 
-    return OrderFactory.create(order as OrderDTO);
+    return OrderFactory.create(orderEntity as OrderDTO);
+  }
+
+  async mockPaymentWebhook(orderId: number, paymentStatus: PaymentStatus): Promise<string | null> {
+    const orderEntity = await this.ormRepository.findOneBy({ id: orderId });
+    if (!orderEntity) { 
+      return null 
+    };
+
+    const isApproved = paymentStatus === PaymentStatus.APROVADO;
+
+    orderEntity.paymentStatus = paymentStatus;
+    orderEntity.status = isApproved ? OrderStatus.RECEBIDO : OrderStatus.CANCELADO;
+
+    await this.ormRepository.save(orderEntity);
+
+    return paymentStatus;
+  }
+
+  async getStatusPayment(orderId: number): Promise<string | null> {
+    const orderEntity = await this.ormRepository.findOneBy({ id: orderId });
+    if (!orderEntity) {
+      return null
+    };
+    return orderEntity.paymentStatus;
   }
 }
