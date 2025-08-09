@@ -5,7 +5,7 @@ import { Order } from "../../../domain/order/entities/order";
 import { OrderStatus } from "../../../domain/order/entities/orderStatus";
 import { OrderDTO } from "../../../application/order/dtos/order.dto";
 import { OrderFactory } from "../../../application/order/factories/order.factory";
-import { IOrderRepository } from "../../../application/order/interfaces/order.interface";
+import { IOrderRepository } from "../../../domain/order/interfaces/order.interface";
 
 import { OrderEntity } from "../entities/order.entity";
 import { OrderProductEntity } from "../entities/orderProduct.entity";

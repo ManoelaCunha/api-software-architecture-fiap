@@ -1,5 +1,5 @@
-import { Order } from "../../../domain/order/entities/order";
-import { OrderStatus } from "../../../domain/order/entities/orderStatus";
+import { Order } from "../entities/order";
+import { OrderStatus } from "../entities/orderStatus";
 
 export interface IOrderRepository {
   createOrder(order: Order): Promise<Order>;

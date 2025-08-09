@@ -1,6 +1,6 @@
 import { DomainError } from "../../_errors/domain.error";
 import { Customer } from "../../customer/entities/customer";
-import { PaymentStatus } from "../../payment/paymentStatus";
+import { PaymentStatus } from "../../payment/entities/paymentStatus";
 import { Status } from "../value-objects/status";
 import { OrderProduct } from "./orderProduct";
 import { OrderStatus } from "./orderStatus";

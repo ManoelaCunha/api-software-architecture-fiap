@@ -2,7 +2,7 @@ import { ApplicationError } from "../../_errors/application.error";
 import { Customer } from "../../../domain/customer/entities/customer";
 import { CPF } from "../../../domain/customer/value-objects/cpf";
 import { CustomerFactory } from "../factories/customer.factory";
-import { ICustomerRepository } from "../interfaces/customer.interface";
+import { ICustomerRepository } from "../../../domain/customer/interfaces/customer.interface";
 import { CreateCustomerDTO } from "../dtos/customer.create.dto";
 
 export class CustomerService {

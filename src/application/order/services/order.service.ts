@@ -3,9 +3,9 @@ import { CPF } from "../../../domain/customer/value-objects/cpf";
 import { OrderStatus } from "../../../domain/order/entities/orderStatus";
 import { OrderProduct } from "../../../domain/order/entities/orderProduct";
 
-import { IOrderRepository } from "../interfaces/order.interface";
-import { IProductRepository } from "../../product/interfaces/product.interface";
-import { ICustomerRepository } from "../../customer/interfaces/customer.interface";
+import { IOrderRepository } from "../../../domain/order/interfaces/order.interface";
+import { IProductRepository } from "../../../domain/product/interfaces/product.interface";
+import { ICustomerRepository } from "../../../domain/customer/interfaces/customer.interface";
 
 import { OrderProductFactory } from "../factories/orderProduct.factory";
 import { OrderFactory } from "../factories/order.factory";

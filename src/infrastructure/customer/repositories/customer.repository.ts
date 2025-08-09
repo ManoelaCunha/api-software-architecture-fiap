@@ -4,7 +4,8 @@ import { CustomerEntity } from "../entities/customer.entity";
 
 import { Customer } from "../../../domain/customer/entities/customer";
 import { CustomerFactory } from "../../../application/customer/factories/customer.factory";
-import { ICustomerRepository } from "../../../application/customer/interfaces/customer.interface";
+import { ICustomerRepository } from "../../../domain/customer/interfaces/customer.interface";
+
 
 export class CustomerRepository implements ICustomerRepository {
   private ormRepository: Repository<CustomerEntity>;

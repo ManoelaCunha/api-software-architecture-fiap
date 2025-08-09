@@ -5,7 +5,8 @@ import { ProductEntity } from "../entities/product.entity";
 import { Product } from "../../../domain/product/entities/product";
 import { ProductCategory } from "../../../domain/product/entities/productCategory";
 import { ProductFactory } from "../../../application/product/factories/product.factory";
-import { IProductRepository } from "../../../application/product/interfaces/product.interface";
+import { IProductRepository } from "../../../domain/product/interfaces/product.interface";
+
 
 export class ProductRepository implements IProductRepository {
   private ormRepository: Repository<ProductEntity>;

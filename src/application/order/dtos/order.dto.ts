@@ -1,5 +1,5 @@
 import { OrderStatus } from "../../../domain/order/entities/orderStatus";
-import { PaymentStatus } from "../../../domain/payment/paymentStatus";
+import { PaymentStatus } from "../../../domain/payment/entities/paymentStatus";
 import { CustomerDTO } from "../../customer/dtos/customer.dto";
 import { OrderProductDTO } from "./orderProduct.dto";
 

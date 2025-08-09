@@ -10,10 +10,10 @@ import { PaymentResponse } from "mercadopago/dist/clients/payment/commonTypes";
 import { Order } from "../../../domain/order/entities/order";
 import { Customer } from "../../../domain/customer/entities/customer";
 import { OrderStatus } from "../../../domain/order/entities/orderStatus";
-import { IPaymentRepository } from "../../../application/payment/interfaces/payment.interface";
+import { IPaymentRepository } from "../../../domain/payment/interfaces/payment.interface";
 import { OrderFactory } from "../../../application/order/factories/order.factory";
 import { OrderDTO } from "../../../application/order/dtos/order.dto";
-import { PaymentStatus } from "../../../domain/payment/paymentStatus";
+import { PaymentStatus } from "../../../domain/payment/entities/paymentStatus";
 
 dotenv.config();
 

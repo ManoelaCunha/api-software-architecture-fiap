@@ -6,7 +6,8 @@ import { DeleteResult } from "typeorm";
 import { Product } from "../../../domain/product/entities/product";
 import { ProductCategory } from "../../../domain/product/entities/productCategory";
 import { ProductFactory } from "../factories/product.factory";
-import { IProductRepository } from "../interfaces/product.interface";
+import { IProductRepository } from "../../../domain/product/interfaces/product.interface";
+
 
 export class ProductService {
   constructor(private productRepository: IProductRepository) {}

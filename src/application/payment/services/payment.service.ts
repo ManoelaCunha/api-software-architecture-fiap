@@ -1,4 +1,4 @@
-import { IPaymentRepository } from "../interfaces/payment.interface";
+import { IPaymentRepository } from "../../../domain/payment/interfaces/payment.interface";
 import { OrderStatus } from "../../../domain/order/entities/orderStatus";
 import { ApplicationError } from "../../_errors/application.error";
 

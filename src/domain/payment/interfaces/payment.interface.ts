@@ -1,6 +1,6 @@
-import { Order } from "../../../domain/order/entities/order";
-import { Customer } from "../../../domain/customer/entities/customer";
-import { OrderStatus } from "../../../domain/order/entities/orderStatus";
+import { Order } from "../../order/entities/order";
+import { Customer } from "../../customer/entities/customer";
+import { OrderStatus } from "../../order/entities/orderStatus";
 import { PaymentResponse } from "mercadopago/dist/clients/payment/commonTypes";
 
 export interface IPaymentRepository {
