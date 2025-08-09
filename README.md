@@ -4,11 +4,15 @@
 
 **Fase 2**: Arquitetura Limpa — Projeto em **Node.js** com **TypeORM**, **PostgreSQL**, **Docker**, **Docker Compose** e **Typescript**.
 
-**Design System**: 
+<br>
+
+**Diagrama de Arquitetura - Clean Architecture + Kubernetes**: 
+
+![Diagram](docs/diagrama-arquitetura.drawio.svg)
 
 <br>
 
-## 🛠️ Instalação e execução
+## 🛠️ Instalação
 
 ### ✅ 1. Clone o repositório
 
@@ -41,55 +45,102 @@ Edite o arquivo .env conforme necessário.
 cp .env.example .env
 ```
 
----
+<br>
 
-### ✅ 4. Inicie a aplicação localmente
+## 🧪 Como Executar e Acessar a API
+
+### 🏠 Ambiente Local
+> Para desenvolvimento com `.env` e execução direta com `yarn dev`:
 
 ```sh
 yarn dev
 ```
+📍 Acesse a API e a documentação Swagger:
+
+```
+http://localhost:3000/api-docs
+```
 
 ---
 
-### ✅ 5. Construa e inicie os containers com Docker
-Isso iniciará o banco de dados PostgreSQL e a aplicação Node.
+### 🐳 Ambiente Docker Compose
+> Inicie os containers com:
 
 ```sh
 docker-compose up --build -d
 ```
 
----
-
-### ✅ 5. Construa e inicie a aplicação com Kubernetes e Minikube
-Isso iniciará o banco de dados PostgreSQL e a aplicação Node.
-
-```sh
-#Minikub
-minikube start
-eval $(minikube docker-env)
-
-#Imagem Docker
-docker build -t api-fiap:latest .
-
-#Configurações
-kubectl apply -f k8s/config/
-
-#Banco de Dados
-kubectl apply -f k8s/database/
-
-#Aplicação
-kubectl apply -f k8s/app/
+📍 Acesse a API e a documentação Swagger:
 
 ```
+http://localhost:3030/api-docs
+```
+
+---
+
+### ☸️ Ambiente Kubernetes com Minikube
+> Minikube simula um cluster Kubernetes local e expõe os serviços em uma rede separada da sua máquina (não é `localhost`).
+
+##### ✅ 1. Inicie o Minikube
+```sh
+minikube start
+```
+
+##### ✅ 2. Configure o Docker para usar o ambiente do Minikube
+> Isso permite que as imagens Docker sejam criadas dentro do ambiente do Minikube.
+
+```sh
+eval $(minikube docker-env)
+```
+
+##### ✅ 3. Construa a imagem da aplicação
+> Este comando irá construir a imagem api-fiap:latest diretamente dentro do Docker do Minikube.
+
+```sh
+docker build -t api-fiap:latest .
+```
+
+##### ✅ 4. Configure os recursos do cluster
+
+> Configurações
+```sh
+kubectl apply -f k8s/config/
+```
+
+> Banco de Dados
+```sh
+kubectl apply -f k8s/database/
+```
+
+> Aplicação
+```sh
+kubectl apply -f k8s/app/
+```
+
+##### ✅ 5. Descubra o IP do cluster
+
+```bash
+minikube ip
+```
+> Exemplo de saída: 192.168.49.2
 
 <br>
 
-## 📈 Documentação com Swagger
+📍 Acesse a API e a documentação Swagger:
 
-- Ambiente Local  http://localhost:3000/api-docs
+```
+http://192.168.49.2:30080/api-docs
+```
+> ⚠️ O IP pode variar entre máquinas ou sessões. Sempre confirme com `minikube ip`.
 
-- Docker Compose  http://localhost:3030/api-docs
+##### ✅ 6. Pause o Minikube
 
-- Kubernetes Minikub  http://192.168.49.2:30080/api-docs
+> Minikube
+```sh
+minikube stop
+```
 
-<br>
+> Docker
+```sh
+eval $(minikube docker-env --unset)
+```
